@@ -152,6 +152,18 @@ async function handleReset() {
         </div>
 
         <div class="option-row">
+          <span class="option-label">Chat Window</span>
+          <label class="switch">
+            <input
+              type="checkbox"
+              :checked="settings.blurChatWindow"
+              @change="handleUpdate('blurChatWindow', !settings.blurChatWindow)"
+            />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="option-row">
           <span class="option-label">Reveal on Hover</span>
           <label class="switch">
             <input
