@@ -10,6 +10,7 @@ describe("PrivacyBlurSettings and DEFAULT_SETTINGS", () => {
     expect(DEFAULT_SETTINGS.blurLastMessage).toBe(false);
     expect(DEFAULT_SETTINGS.blurContactName).toBe(false);
     expect(DEFAULT_SETTINGS.blurAvatar).toBe(false);
+    expect(DEFAULT_SETTINGS.blurChatWindow).toBe(true);
     expect(DEFAULT_SETTINGS.unblurOnHover).toBe(true);
   });
 
@@ -25,6 +26,7 @@ describe("PrivacyBlurSettings and DEFAULT_SETTINGS", () => {
       blurLastMessage: true,
       blurContactName: true,
       blurAvatar: true,
+      blurChatWindow: false,
       unblurOnHover: false,
     };
     expect(isValidSettings(customSettings)).toBe(true);
@@ -45,6 +47,12 @@ describe("PrivacyBlurSettings and DEFAULT_SETTINGS", () => {
       blurEntireRow: true,
     };
     expect(isValidSettings(incomplete)).toBe(false);
+
+    const missingBlurChatWindow: Record<string, unknown> = {
+      ...DEFAULT_SETTINGS,
+    };
+    delete missingBlurChatWindow.blurChatWindow;
+    expect(isValidSettings(missingBlurChatWindow)).toBe(false);
   });
 
   it("should return false when property types are incorrect", () => {
@@ -73,6 +81,13 @@ describe("PrivacyBlurSettings and DEFAULT_SETTINGS", () => {
       isValidSettings({
         ...DEFAULT_SETTINGS,
         blurAmount: -5,
+      })
+    ).toBe(false);
+
+    expect(
+      isValidSettings({
+        ...DEFAULT_SETTINGS,
+        blurChatWindow: "true",
       })
     ).toBe(false);
 

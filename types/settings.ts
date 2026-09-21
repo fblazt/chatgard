@@ -5,6 +5,7 @@ export interface PrivacyBlurSettings {
   blurLastMessage: boolean;
   blurContactName: boolean;
   blurAvatar: boolean;
+  blurChatWindow: boolean;
   unblurOnHover: boolean;
 }
 
@@ -15,6 +16,7 @@ export const DEFAULT_SETTINGS: PrivacyBlurSettings = {
   blurLastMessage: false,
   blurContactName: false,
   blurAvatar: false,
+  blurChatWindow: true,
   unblurOnHover: true,
 };
 
@@ -32,6 +34,7 @@ export function isValidSettings(value: unknown): value is PrivacyBlurSettings {
     typeof s.blurLastMessage === 'boolean' &&
     typeof s.blurContactName === 'boolean' &&
     typeof s.blurAvatar === 'boolean' &&
+    typeof s.blurChatWindow === 'boolean' &&
     typeof s.unblurOnHover === 'boolean'
   );
 }
