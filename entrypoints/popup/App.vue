@@ -59,7 +59,7 @@ async function handleReset() {
             <path d="M9 12l2 2 4-4" />
           </svg>
         </div>
-        <h1 class="header-title">Secure Chat</h1>
+        <h1 class="header-title">ChatGard</h1>
       </div>
       <div class="active-badge">
         <span class="pulse-dot"></span>
