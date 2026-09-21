@@ -20,6 +20,6 @@ export default defineContentScript({
       removePrivacySettingsFromDOM();
     });
 
-    console.info('[Secure Chat] Privacy blur initialized');
+    console.info('[ChatGard] Privacy blur initialized');
   },
 });
