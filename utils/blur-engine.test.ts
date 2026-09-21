@@ -72,11 +72,11 @@ function createMockDocument(
 
 describe('blur-engine constants', () => {
   it('exports expected class names', () => {
-    expect(BLUR_ENABLED_CLASS).toBe('secure-chat-blur-enabled');
-    expect(BLUR_ENTIRE_ROW_CLASS).toBe('secure-chat-blur-entire-row');
-    expect(BLUR_MESSAGE_CLASS).toBe('secure-chat-blur-message');
-    expect(BLUR_CONTACT_CLASS).toBe('secure-chat-blur-contact');
-    expect(BLUR_AVATAR_CLASS).toBe('secure-chat-blur-avatar');
+    expect(BLUR_ENABLED_CLASS).toBe('chat-blur-enabled');
+    expect(BLUR_ENTIRE_ROW_CLASS).toBe('chat-blur-entire-row');
+    expect(BLUR_MESSAGE_CLASS).toBe('chat-blur-message');
+    expect(BLUR_CONTACT_CLASS).toBe('chat-blur-contact');
+    expect(BLUR_AVATAR_CLASS).toBe('chat-blur-avatar');
   });
 
   it('contains all blur classes in ALL_BLUR_CLASSES', () => {
@@ -178,17 +178,17 @@ describe('computeDOMClasses', () => {
 });
 
 describe('computeStyleVariables', () => {
-  it('sets --secure-chat-blur-amount based on blurAmount setting', () => {
+  it('sets --chat-blur-amount based on blurAmount setting', () => {
     expect(computeStyleVariables({ ...baseSettings, blurAmount: 8 })).toEqual({
-      '--secure-chat-blur-amount': '8px',
+      '--chat-blur-amount': '8px',
     });
 
     expect(computeStyleVariables({ ...baseSettings, blurAmount: 14 })).toEqual({
-      '--secure-chat-blur-amount': '14px',
+      '--chat-blur-amount': '14px',
     });
 
     expect(computeStyleVariables({ ...baseSettings, blurAmount: 0 })).toEqual({
-      '--secure-chat-blur-amount': '0px',
+      '--chat-blur-amount': '0px',
     });
   });
 });
@@ -212,7 +212,7 @@ describe('applyPrivacySettingsToDOM', () => {
     expect(classes.has(BLUR_CONTACT_CLASS)).toBe(true);
     expect(classes.has(BLUR_AVATAR_CLASS)).toBe(false);
     expect(classes.has(BLUR_ENTIRE_ROW_CLASS)).toBe(false);
-    expect(styles.get('--secure-chat-blur-amount')).toBe('12px');
+    expect(styles.get('--chat-blur-amount')).toBe('12px');
   });
 
   it('removes stale blur classes when settings are updated', () => {
@@ -272,7 +272,7 @@ describe('applyPrivacySettingsToDOM', () => {
 
     expect(classes.has(BLUR_ENABLED_CLASS)).toBe(true);
     expect(classes.has(BLUR_ENTIRE_ROW_CLASS)).toBe(true);
-    expect(styles.get('--secure-chat-blur-amount')).toBe('10px');
+    expect(styles.get('--chat-blur-amount')).toBe('10px');
   });
 
   it('safely handles undefined document in non-DOM environment', () => {
@@ -303,7 +303,7 @@ describe('removePrivacySettingsFromDOM', () => {
   it('removes all blur classes and style properties from targetDoc', () => {
     const { doc, classes, styles } = createMockDocument(
       [BLUR_ENABLED_CLASS, BLUR_ENTIRE_ROW_CLASS, BLUR_MESSAGE_CLASS],
-      { '--secure-chat-blur-amount': '10px' }
+      { '--chat-blur-amount': '10px' }
     );
 
     removePrivacySettingsFromDOM(doc);
@@ -311,14 +311,14 @@ describe('removePrivacySettingsFromDOM', () => {
     expect(classes.has(BLUR_ENABLED_CLASS)).toBe(false);
     expect(classes.has(BLUR_ENTIRE_ROW_CLASS)).toBe(false);
     expect(classes.has(BLUR_MESSAGE_CLASS)).toBe(false);
-    expect(styles.has('--secure-chat-blur-amount')).toBe(false);
+    expect(styles.has('--chat-blur-amount')).toBe(false);
   });
 
   it('defaults to globalThis.document when targetDoc is omitted', () => {
     const originalDoc = (globalThis as any).document;
     const { doc, classes, styles } = createMockDocument(
       [BLUR_ENABLED_CLASS, BLUR_AVATAR_CLASS],
-      { '--secure-chat-blur-amount': '8px' }
+      { '--chat-blur-amount': '8px' }
     );
 
     try {
@@ -327,7 +327,7 @@ describe('removePrivacySettingsFromDOM', () => {
 
       expect(classes.has(BLUR_ENABLED_CLASS)).toBe(false);
       expect(classes.has(BLUR_AVATAR_CLASS)).toBe(false);
-      expect(styles.has('--secure-chat-blur-amount')).toBe(false);
+      expect(styles.has('--chat-blur-amount')).toBe(false);
     } finally {
       (globalThis as any).document = originalDoc;
     }

@@ -1,10 +1,10 @@
 import type { PrivacyBlurSettings } from '../types/settings';
 
-export const BLUR_ENABLED_CLASS = 'secure-chat-blur-enabled';
-export const BLUR_ENTIRE_ROW_CLASS = 'secure-chat-blur-entire-row';
-export const BLUR_MESSAGE_CLASS = 'secure-chat-blur-message';
-export const BLUR_CONTACT_CLASS = 'secure-chat-blur-contact';
-export const BLUR_AVATAR_CLASS = 'secure-chat-blur-avatar';
+export const BLUR_ENABLED_CLASS = 'chat-blur-enabled';
+export const BLUR_ENTIRE_ROW_CLASS = 'chat-blur-entire-row';
+export const BLUR_MESSAGE_CLASS = 'chat-blur-message';
+export const BLUR_CONTACT_CLASS = 'chat-blur-contact';
+export const BLUR_AVATAR_CLASS = 'chat-blur-avatar';
 
 export const ALL_BLUR_CLASSES: string[] = [
   BLUR_ENABLED_CLASS,
@@ -39,7 +39,7 @@ export function computeDOMClasses(settings: PrivacyBlurSettings): string[] {
 
 export function computeStyleVariables(settings: PrivacyBlurSettings): Record<string, string> {
   return {
-    '--secure-chat-blur-amount': `${settings.blurAmount}px`,
+    '--chat-blur-amount': `${settings.blurAmount}px`,
   };
 }
 
@@ -83,5 +83,5 @@ export function removePrivacySettingsFromDOM(targetDoc?: Document): void {
     root.classList.remove(cls);
   }
 
-  root.style.removeProperty('--secure-chat-blur-amount');
+  root.style.removeProperty('--chat-blur-amount');
 }
