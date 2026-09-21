@@ -59,6 +59,18 @@ describe('storage utility', () => {
       const stored = await getPrivacySettings();
       expect(stored).toEqual(updated);
     });
+
+    it('updates blurChatWindow setting independently and persists it', async () => {
+      const updated = await updatePrivacySettings({
+        blurChatWindow: false,
+      });
+
+      expect(updated.blurChatWindow).toBe(false);
+
+      const stored = await getPrivacySettings();
+      expect(stored.blurChatWindow).toBe(false);
+      expect(stored).toEqual(updated);
+    });
   });
 
   describe('resetPrivacySettings', () => {
@@ -66,13 +78,16 @@ describe('storage utility', () => {
       await updatePrivacySettings({
         blurEntireRow: true,
         blurAmount: 20,
+        blurChatWindow: false,
       });
 
       const resetResult = await resetPrivacySettings();
       expect(resetResult).toEqual(DEFAULT_SETTINGS);
+      expect(resetResult.blurChatWindow).toBe(DEFAULT_SETTINGS.blurChatWindow);
 
       const stored = await getPrivacySettings();
       expect(stored).toEqual(DEFAULT_SETTINGS);
+      expect(stored.blurChatWindow).toBe(DEFAULT_SETTINGS.blurChatWindow);
     });
   });
 });
