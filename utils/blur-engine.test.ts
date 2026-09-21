@@ -3,6 +3,7 @@ import type { PrivacyBlurSettings } from '../types/settings';
 import {
   ALL_BLUR_CLASSES,
   BLUR_AVATAR_CLASS,
+  BLUR_CHAT_WINDOW_CLASS,
   BLUR_CONTACT_CLASS,
   BLUR_ENABLED_CLASS,
   BLUR_ENTIRE_ROW_CLASS,
@@ -20,6 +21,7 @@ const baseSettings: PrivacyBlurSettings = {
   blurLastMessage: false,
   blurContactName: false,
   blurAvatar: false,
+  blurChatWindow: false,
   unblurOnHover: true,
 };
 
@@ -77,6 +79,7 @@ describe('blur-engine constants', () => {
     expect(BLUR_MESSAGE_CLASS).toBe('chat-blur-message');
     expect(BLUR_CONTACT_CLASS).toBe('chat-blur-contact');
     expect(BLUR_AVATAR_CLASS).toBe('chat-blur-avatar');
+    expect(BLUR_CHAT_WINDOW_CLASS).toBe('chat-blur-chat-window');
   });
 
   it('contains all blur classes in ALL_BLUR_CLASSES', () => {
@@ -86,6 +89,7 @@ describe('blur-engine constants', () => {
       BLUR_MESSAGE_CLASS,
       BLUR_CONTACT_CLASS,
       BLUR_AVATAR_CLASS,
+      BLUR_CHAT_WINDOW_CLASS,
     ]);
   });
 });
@@ -99,6 +103,7 @@ describe('computeDOMClasses', () => {
       blurLastMessage: true,
       blurContactName: true,
       blurAvatar: true,
+      blurChatWindow: true,
     };
 
     expect(computeDOMClasses(disabledSettings)).toEqual([]);
@@ -112,6 +117,7 @@ describe('computeDOMClasses', () => {
       blurLastMessage: false,
       blurContactName: false,
       blurAvatar: false,
+      blurChatWindow: false,
     };
 
     expect(computeDOMClasses(fullRowSettings)).toEqual([
@@ -128,6 +134,7 @@ describe('computeDOMClasses', () => {
       blurLastMessage: true,
       blurContactName: false,
       blurAvatar: false,
+      blurChatWindow: false,
     };
     expect(computeDOMClasses(messageOnly)).toEqual([
       BLUR_ENABLED_CLASS,
@@ -141,6 +148,7 @@ describe('computeDOMClasses', () => {
       blurLastMessage: false,
       blurContactName: true,
       blurAvatar: true,
+      blurChatWindow: false,
     };
     expect(computeDOMClasses(contactAndAvatar)).toEqual([
       BLUR_ENABLED_CLASS,
@@ -155,13 +163,38 @@ describe('computeDOMClasses', () => {
       blurLastMessage: true,
       blurContactName: true,
       blurAvatar: true,
+      blurChatWindow: true,
     };
     expect(computeDOMClasses(allSelective)).toEqual([
       BLUR_ENABLED_CLASS,
       BLUR_MESSAGE_CLASS,
       BLUR_CONTACT_CLASS,
       BLUR_AVATAR_CLASS,
+      BLUR_CHAT_WINDOW_CLASS,
     ]);
+  });
+
+  it('returns chat window blur class when blurChatWindow is true', () => {
+    const chatWindowSettings: PrivacyBlurSettings = {
+      ...baseSettings,
+      enabled: true,
+      blurChatWindow: true,
+    };
+
+    expect(computeDOMClasses(chatWindowSettings)).toEqual([
+      BLUR_ENABLED_CLASS,
+      BLUR_CHAT_WINDOW_CLASS,
+    ]);
+  });
+
+  it('does not return chat window blur class when blurChatWindow is false', () => {
+    const withoutChatWindow: PrivacyBlurSettings = {
+      ...baseSettings,
+      enabled: true,
+      blurChatWindow: false,
+    };
+
+    expect(computeDOMClasses(withoutChatWindow)).not.toContain(BLUR_CHAT_WINDOW_CLASS);
   });
 
   it('returns only BLUR_ENABLED_CLASS when enabled but no blur options selected', () => {
@@ -172,6 +205,7 @@ describe('computeDOMClasses', () => {
       blurLastMessage: false,
       blurContactName: false,
       blurAvatar: false,
+      blurChatWindow: false,
     };
     expect(computeDOMClasses(minimalEnabled)).toEqual([BLUR_ENABLED_CLASS]);
   });
@@ -202,6 +236,7 @@ describe('applyPrivacySettingsToDOM', () => {
       blurEntireRow: false,
       blurLastMessage: true,
       blurContactName: true,
+      blurChatWindow: true,
       blurAmount: 12,
     };
 
@@ -210,6 +245,7 @@ describe('applyPrivacySettingsToDOM', () => {
     expect(classes.has(BLUR_ENABLED_CLASS)).toBe(true);
     expect(classes.has(BLUR_MESSAGE_CLASS)).toBe(true);
     expect(classes.has(BLUR_CONTACT_CLASS)).toBe(true);
+    expect(classes.has(BLUR_CHAT_WINDOW_CLASS)).toBe(true);
     expect(classes.has(BLUR_AVATAR_CLASS)).toBe(false);
     expect(classes.has(BLUR_ENTIRE_ROW_CLASS)).toBe(false);
     expect(styles.get('--chat-blur-amount')).toBe('12px');
@@ -220,6 +256,7 @@ describe('applyPrivacySettingsToDOM', () => {
       BLUR_ENABLED_CLASS,
       BLUR_ENTIRE_ROW_CLASS,
       BLUR_MESSAGE_CLASS,
+      BLUR_CHAT_WINDOW_CLASS,
     ]);
 
     const selectiveSettings: PrivacyBlurSettings = {
@@ -228,6 +265,7 @@ describe('applyPrivacySettingsToDOM', () => {
       blurEntireRow: false,
       blurLastMessage: false,
       blurAvatar: true,
+      blurChatWindow: false,
       blurAmount: 6,
     };
 
@@ -236,6 +274,7 @@ describe('applyPrivacySettingsToDOM', () => {
     expect(classes.has(BLUR_ENABLED_CLASS)).toBe(true);
     expect(classes.has(BLUR_ENTIRE_ROW_CLASS)).toBe(false);
     expect(classes.has(BLUR_MESSAGE_CLASS)).toBe(false);
+    expect(classes.has(BLUR_CHAT_WINDOW_CLASS)).toBe(false);
     expect(classes.has(BLUR_AVATAR_CLASS)).toBe(true);
   });
 
@@ -244,12 +283,14 @@ describe('applyPrivacySettingsToDOM', () => {
       BLUR_ENABLED_CLASS,
       BLUR_ENTIRE_ROW_CLASS,
       BLUR_MESSAGE_CLASS,
+      BLUR_CHAT_WINDOW_CLASS,
     ]);
 
     const disabledSettings: PrivacyBlurSettings = {
       ...baseSettings,
       enabled: false,
       blurEntireRow: true,
+      blurChatWindow: true,
     };
 
     applyPrivacySettingsToDOM(disabledSettings, doc);
@@ -257,6 +298,7 @@ describe('applyPrivacySettingsToDOM', () => {
     expect(classes.has(BLUR_ENABLED_CLASS)).toBe(false);
     expect(classes.has(BLUR_ENTIRE_ROW_CLASS)).toBe(false);
     expect(classes.has(BLUR_MESSAGE_CLASS)).toBe(false);
+    expect(classes.has(BLUR_CHAT_WINDOW_CLASS)).toBe(false);
   });
 
   it('falls back to doc.body if documentElement is absent', () => {
@@ -302,7 +344,7 @@ describe('applyPrivacySettingsToDOM', () => {
 describe('removePrivacySettingsFromDOM', () => {
   it('removes all blur classes and style properties from targetDoc', () => {
     const { doc, classes, styles } = createMockDocument(
-      [BLUR_ENABLED_CLASS, BLUR_ENTIRE_ROW_CLASS, BLUR_MESSAGE_CLASS],
+      [BLUR_ENABLED_CLASS, BLUR_ENTIRE_ROW_CLASS, BLUR_MESSAGE_CLASS, BLUR_CHAT_WINDOW_CLASS],
       { '--chat-blur-amount': '10px' }
     );
 
@@ -311,13 +353,14 @@ describe('removePrivacySettingsFromDOM', () => {
     expect(classes.has(BLUR_ENABLED_CLASS)).toBe(false);
     expect(classes.has(BLUR_ENTIRE_ROW_CLASS)).toBe(false);
     expect(classes.has(BLUR_MESSAGE_CLASS)).toBe(false);
+    expect(classes.has(BLUR_CHAT_WINDOW_CLASS)).toBe(false);
     expect(styles.has('--chat-blur-amount')).toBe(false);
   });
 
   it('defaults to globalThis.document when targetDoc is omitted', () => {
     const originalDoc = (globalThis as any).document;
     const { doc, classes, styles } = createMockDocument(
-      [BLUR_ENABLED_CLASS, BLUR_AVATAR_CLASS],
+      [BLUR_ENABLED_CLASS, BLUR_AVATAR_CLASS, BLUR_CHAT_WINDOW_CLASS],
       { '--chat-blur-amount': '8px' }
     );
 
@@ -327,6 +370,7 @@ describe('removePrivacySettingsFromDOM', () => {
 
       expect(classes.has(BLUR_ENABLED_CLASS)).toBe(false);
       expect(classes.has(BLUR_AVATAR_CLASS)).toBe(false);
+      expect(classes.has(BLUR_CHAT_WINDOW_CLASS)).toBe(false);
       expect(styles.has('--chat-blur-amount')).toBe(false);
     } finally {
       (globalThis as any).document = originalDoc;
