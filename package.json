@@ -1,9 +1,27 @@
 {
-  "name": "wxt-vue-starter",
-  "description": "manifest.json description",
+  "name": "secure-chat",
+  "description": "Privacy blur browser extension for WhatsApp Web",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "author": "fblazt",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fblazt/secure-chat.git"
+  },
+  "homepage": "https://github.com/fblazt/secure-chat#readme",
+  "bugs": {
+    "url": "https://github.com/fblazt/secure-chat/issues"
+  },
+  "keywords": [
+    "whatsapp",
+    "privacy",
+    "blur",
+    "wxt",
+    "extension",
+    "vue"
+  ],
   "scripts": {
     "dev": "wxt",
     "dev:firefox": "wxt -b firefox",
