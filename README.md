@@ -1,6 +1,6 @@
-# Secure Chat
+# ChatGard: Screen Privacy for Web Messengers
 
-Secure Chat is a browser extension that blurs WhatsApp Web chat list items until hovered to prevent shoulder surfing.
+ChatGard is a browser extension that blurs chat lists and messages until hovered to prevent shoulder surfing in public and office environments. Built for WhatsApp Web with planned support for Telegram Web and other web messengers.
 
 ## Features
 
