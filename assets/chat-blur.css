@@ -149,3 +149,54 @@
 .chat-blur-avatar #pane-side div[role="row"] img:focus {
   filter: none !important;
 }
+
+/* ==========================================================================
+   5. Active Chat Window Messages Blur
+   Targets message bubbles inside the active chat conversation window.
+   Active when .chat-blur-chat-window is present or enabled.
+   ========================================================================== */
+.chat-blur-enabled.chat-blur-chat-window #main [data-testid="msg-container"],
+.chat-blur-enabled.chat-blur-chat-window [data-testid="conversation-panel-wrapper"] [data-testid="msg-container"],
+.chat-blur-enabled.chat-blur-chat-window [data-testid="conversation-panel-messages"] [data-testid="msg-container"],
+.chat-blur-enabled .chat-blur-chat-window #main [data-testid="msg-container"],
+.chat-blur-enabled .chat-blur-chat-window [data-testid="conversation-panel-wrapper"] [data-testid="msg-container"],
+.chat-blur-enabled .chat-blur-chat-window [data-testid="conversation-panel-messages"] [data-testid="msg-container"],
+.chat-blur-chat-window #main [data-testid="msg-container"],
+.chat-blur-chat-window [data-testid="conversation-panel-wrapper"] [data-testid="msg-container"],
+.chat-blur-chat-window [data-testid="conversation-panel-messages"] [data-testid="msg-container"] {
+  filter: blur(var(--chat-blur-amount, 8px));
+  transition: var(--chat-blur-transition, filter 0.18s ease-in-out);
+  will-change: filter;
+}
+
+/* Chat Window Messages Hover and Focus Unblur */
+#main [data-testid="msg-container"]:hover,
+#main [data-testid="msg-container"]:focus-within,
+#main div[role="row"]:hover [data-testid="msg-container"],
+#main div[role="row"]:focus-within [data-testid="msg-container"],
+[data-testid="conversation-panel-messages"] [data-testid="msg-container"]:hover,
+[data-testid="conversation-panel-messages"] [data-testid="msg-container"]:focus-within,
+[data-testid="conversation-panel-messages"] div[role="row"]:hover [data-testid="msg-container"],
+[data-testid="conversation-panel-messages"] div[role="row"]:focus-within [data-testid="msg-container"],
+[data-testid="conversation-panel-wrapper"] [data-testid="msg-container"]:hover,
+[data-testid="conversation-panel-wrapper"] [data-testid="msg-container"]:focus-within,
+[data-testid="conversation-panel-wrapper"] div[role="row"]:hover [data-testid="msg-container"],
+[data-testid="conversation-panel-wrapper"] div[role="row"]:focus-within [data-testid="msg-container"],
+.chat-blur-enabled.chat-blur-chat-window #main [data-testid="msg-container"]:hover,
+.chat-blur-enabled.chat-blur-chat-window #main [data-testid="msg-container"]:focus-within,
+.chat-blur-enabled.chat-blur-chat-window #main div[role="row"]:hover [data-testid="msg-container"],
+.chat-blur-enabled.chat-blur-chat-window #main div[role="row"]:focus-within [data-testid="msg-container"],
+.chat-blur-enabled.chat-blur-chat-window [data-testid="conversation-panel-messages"] [data-testid="msg-container"]:hover,
+.chat-blur-enabled.chat-blur-chat-window [data-testid="conversation-panel-messages"] [data-testid="msg-container"]:focus-within,
+.chat-blur-enabled.chat-blur-chat-window [data-testid="conversation-panel-messages"] div[role="row"]:hover [data-testid="msg-container"],
+.chat-blur-enabled.chat-blur-chat-window [data-testid="conversation-panel-messages"] div[role="row"]:focus-within [data-testid="msg-container"],
+.chat-blur-chat-window #main [data-testid="msg-container"]:hover,
+.chat-blur-chat-window #main [data-testid="msg-container"]:focus-within,
+.chat-blur-chat-window #main div[role="row"]:hover [data-testid="msg-container"],
+.chat-blur-chat-window #main div[role="row"]:focus-within [data-testid="msg-container"],
+.chat-blur-chat-window [data-testid="conversation-panel-messages"] [data-testid="msg-container"]:hover,
+.chat-blur-chat-window [data-testid="conversation-panel-messages"] [data-testid="msg-container"]:focus-within,
+.chat-blur-chat-window [data-testid="conversation-panel-messages"] div[role="row"]:hover [data-testid="msg-container"],
+.chat-blur-chat-window [data-testid="conversation-panel-messages"] div[role="row"]:focus-within [data-testid="msg-container"] {
+  filter: none !important;
+}
