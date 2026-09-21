@@ -1,0 +1,151 @@
+/**
+ * Secure Chat - WhatsApp Web Chat List Privacy Blur Styles
+ * Targets WhatsApp Web chat list elements as analyzed from DOM structure.
+ */
+
+/* ==========================================================================
+   1. Root CSS Variables
+   ========================================================================== */
+:root {
+  --secure-chat-blur-amount: 8px;
+  --secure-chat-blur-transition: filter 0.18s ease-in-out;
+}
+
+/* ==========================================================================
+   2. Entire Row Blur
+   Active when .secure-chat-blur-entire-row is present or by default when blur
+   is enabled without selective blur classes.
+   ========================================================================== */
+.secure-chat-blur-enabled.secure-chat-blur-entire-row #pane-side div[role="row"],
+.secure-chat-blur-enabled.secure-chat-blur-entire-row [data-testid="chat-list"] div[role="row"],
+.secure-chat-blur-enabled.secure-chat-blur-entire-row [data-testid="chat-list"] [data-testid^="list-item-"],
+.secure-chat-blur-enabled .secure-chat-blur-entire-row #pane-side div[role="row"],
+.secure-chat-blur-enabled .secure-chat-blur-entire-row [data-testid="chat-list"] div[role="row"],
+.secure-chat-blur-enabled .secure-chat-blur-entire-row [data-testid="chat-list"] [data-testid^="list-item-"],
+.secure-chat-blur-enabled:not(.secure-chat-blur-message):not(.secure-chat-blur-contact):not(.secure-chat-blur-avatar) #pane-side div[role="row"],
+.secure-chat-blur-enabled:not(.secure-chat-blur-message):not(.secure-chat-blur-contact):not(.secure-chat-blur-avatar) [data-testid="chat-list"] div[role="row"],
+.secure-chat-blur-enabled:not(.secure-chat-blur-message):not(.secure-chat-blur-contact):not(.secure-chat-blur-avatar) [data-testid="chat-list"] [data-testid^="list-item-"],
+.secure-chat-blur-entire-row #pane-side div[role="row"],
+.secure-chat-blur-entire-row [data-testid="chat-list"] div[role="row"],
+.secure-chat-blur-entire-row [data-testid="chat-list"] [data-testid^="list-item-"] {
+  filter: blur(var(--secure-chat-blur-amount, 8px));
+  transition: var(--secure-chat-blur-transition, filter 0.18s ease-in-out);
+  will-change: filter;
+}
+
+/* ==========================================================================
+   3. Hover and Focus Unblur
+   Reveals chat items when hovering or focusing within the row.
+   ========================================================================== */
+#pane-side div[role="row"]:hover,
+#pane-side div[role="row"]:focus-within,
+[data-testid="chat-list"] div[role="row"]:hover,
+[data-testid="chat-list"] div[role="row"]:focus-within,
+[data-testid="chat-list"] [data-testid^="list-item-"]:hover,
+[data-testid="chat-list"] [data-testid^="list-item-"]:focus-within,
+.secure-chat-blur-enabled #pane-side div[role="row"]:hover,
+.secure-chat-blur-enabled #pane-side div[role="row"]:focus-within,
+.secure-chat-blur-enabled [data-testid="chat-list"] div[role="row"]:hover,
+.secure-chat-blur-enabled [data-testid="chat-list"] div[role="row"]:focus-within,
+.secure-chat-blur-enabled [data-testid="chat-list"] [data-testid^="list-item-"]:hover,
+.secure-chat-blur-enabled [data-testid="chat-list"] [data-testid^="list-item-"]:focus-within {
+  filter: none !important;
+}
+
+/* ==========================================================================
+   4. Selective Blur Classes
+   Target individual components (message preview, contact title, avatar).
+   ========================================================================== */
+
+/* --- 4.1 Last Message Preview Blur --- */
+.secure-chat-blur-enabled.secure-chat-blur-message [data-testid="cell-frame-secondary"],
+.secure-chat-blur-enabled .secure-chat-blur-message [data-testid="cell-frame-secondary"],
+.secure-chat-blur-message [data-testid="cell-frame-secondary"] {
+  filter: blur(var(--secure-chat-blur-amount, 8px));
+  transition: var(--secure-chat-blur-transition, filter 0.18s ease-in-out);
+  will-change: filter;
+}
+
+/* Message Preview Hover and Focus Unblur */
+.secure-chat-blur-enabled.secure-chat-blur-message #pane-side div[role="row"]:hover [data-testid="cell-frame-secondary"],
+.secure-chat-blur-enabled.secure-chat-blur-message #pane-side div[role="row"]:focus-within [data-testid="cell-frame-secondary"],
+.secure-chat-blur-enabled.secure-chat-blur-message [data-testid="chat-list"] div[role="row"]:hover [data-testid="cell-frame-secondary"],
+.secure-chat-blur-enabled.secure-chat-blur-message [data-testid="chat-list"] div[role="row"]:focus-within [data-testid="cell-frame-secondary"],
+.secure-chat-blur-enabled.secure-chat-blur-message [data-testid="chat-list"] [data-testid^="list-item-"]:hover [data-testid="cell-frame-secondary"],
+.secure-chat-blur-enabled.secure-chat-blur-message [data-testid="chat-list"] [data-testid^="list-item-"]:focus-within [data-testid="cell-frame-secondary"],
+.secure-chat-blur-enabled.secure-chat-blur-message [data-testid="cell-frame-secondary"]:hover,
+.secure-chat-blur-enabled.secure-chat-blur-message [data-testid="cell-frame-secondary"]:focus-within,
+.secure-chat-blur-message #pane-side div[role="row"]:hover [data-testid="cell-frame-secondary"],
+.secure-chat-blur-message #pane-side div[role="row"]:focus-within [data-testid="cell-frame-secondary"],
+.secure-chat-blur-message [data-testid="chat-list"] div[role="row"]:hover [data-testid="cell-frame-secondary"],
+.secure-chat-blur-message [data-testid="chat-list"] div[role="row"]:focus-within [data-testid="cell-frame-secondary"],
+.secure-chat-blur-message [data-testid="chat-list"] [data-testid^="list-item-"]:hover [data-testid="cell-frame-secondary"],
+.secure-chat-blur-message [data-testid="chat-list"] [data-testid^="list-item-"]:focus-within [data-testid="cell-frame-secondary"],
+.secure-chat-blur-message [data-testid="cell-frame-secondary"]:hover,
+.secure-chat-blur-message [data-testid="cell-frame-secondary"]:focus-within {
+  filter: none !important;
+}
+
+/* --- 4.2 Contact / Chat Title Blur --- */
+.secure-chat-blur-enabled.secure-chat-blur-contact [data-testid="cell-frame-title"],
+.secure-chat-blur-enabled .secure-chat-blur-contact [data-testid="cell-frame-title"],
+.secure-chat-blur-contact [data-testid="cell-frame-title"] {
+  filter: blur(var(--secure-chat-blur-amount, 8px));
+  transition: var(--secure-chat-blur-transition, filter 0.18s ease-in-out);
+  will-change: filter;
+}
+
+/* Contact / Chat Title Hover and Focus Unblur */
+.secure-chat-blur-enabled.secure-chat-blur-contact #pane-side div[role="row"]:hover [data-testid="cell-frame-title"],
+.secure-chat-blur-enabled.secure-chat-blur-contact #pane-side div[role="row"]:focus-within [data-testid="cell-frame-title"],
+.secure-chat-blur-enabled.secure-chat-blur-contact [data-testid="chat-list"] div[role="row"]:hover [data-testid="cell-frame-title"],
+.secure-chat-blur-enabled.secure-chat-blur-contact [data-testid="chat-list"] div[role="row"]:focus-within [data-testid="cell-frame-title"],
+.secure-chat-blur-enabled.secure-chat-blur-contact [data-testid="chat-list"] [data-testid^="list-item-"]:hover [data-testid="cell-frame-title"],
+.secure-chat-blur-enabled.secure-chat-blur-contact [data-testid="chat-list"] [data-testid^="list-item-"]:focus-within [data-testid="cell-frame-title"],
+.secure-chat-blur-enabled.secure-chat-blur-contact [data-testid="cell-frame-title"]:hover,
+.secure-chat-blur-enabled.secure-chat-blur-contact [data-testid="cell-frame-title"]:focus-within,
+.secure-chat-blur-contact #pane-side div[role="row"]:hover [data-testid="cell-frame-title"],
+.secure-chat-blur-contact #pane-side div[role="row"]:focus-within [data-testid="cell-frame-title"],
+.secure-chat-blur-contact [data-testid="chat-list"] div[role="row"]:hover [data-testid="cell-frame-title"],
+.secure-chat-blur-contact [data-testid="chat-list"] div[role="row"]:focus-within [data-testid="cell-frame-title"],
+.secure-chat-blur-contact [data-testid="chat-list"] [data-testid^="list-item-"]:hover [data-testid="cell-frame-title"],
+.secure-chat-blur-contact [data-testid="chat-list"] [data-testid^="list-item-"]:focus-within [data-testid="cell-frame-title"],
+.secure-chat-blur-contact [data-testid="cell-frame-title"]:hover,
+.secure-chat-blur-contact [data-testid="cell-frame-title"]:focus-within {
+  filter: none !important;
+}
+
+/* --- 4.3 Profile Avatar Blur --- */
+.secure-chat-blur-enabled.secure-chat-blur-avatar #pane-side div[role="row"] img,
+.secure-chat-blur-enabled.secure-chat-blur-avatar [data-testid="chat-list"] div[role="row"] img,
+.secure-chat-blur-enabled.secure-chat-blur-avatar [data-testid="chat-list"] [data-testid^="list-item-"] img,
+.secure-chat-blur-enabled .secure-chat-blur-avatar #pane-side div[role="row"] img,
+.secure-chat-blur-enabled .secure-chat-blur-avatar [data-testid="chat-list"] div[role="row"] img,
+.secure-chat-blur-enabled .secure-chat-blur-avatar [data-testid="chat-list"] [data-testid^="list-item-"] img,
+.secure-chat-blur-avatar #pane-side div[role="row"] img,
+.secure-chat-blur-avatar [data-testid="chat-list"] div[role="row"] img,
+.secure-chat-blur-avatar [data-testid="chat-list"] [data-testid^="list-item-"] img {
+  filter: blur(var(--secure-chat-blur-amount, 8px));
+  transition: var(--secure-chat-blur-transition, filter 0.18s ease-in-out);
+  will-change: filter;
+}
+
+/* Profile Avatar Hover and Focus Unblur */
+.secure-chat-blur-enabled.secure-chat-blur-avatar #pane-side div[role="row"]:hover img,
+.secure-chat-blur-enabled.secure-chat-blur-avatar #pane-side div[role="row"]:focus-within img,
+.secure-chat-blur-enabled.secure-chat-blur-avatar [data-testid="chat-list"] div[role="row"]:hover img,
+.secure-chat-blur-enabled.secure-chat-blur-avatar [data-testid="chat-list"] div[role="row"]:focus-within img,
+.secure-chat-blur-enabled.secure-chat-blur-avatar [data-testid="chat-list"] [data-testid^="list-item-"]:hover img,
+.secure-chat-blur-enabled.secure-chat-blur-avatar [data-testid="chat-list"] [data-testid^="list-item-"]:focus-within img,
+.secure-chat-blur-enabled.secure-chat-blur-avatar #pane-side div[role="row"] img:hover,
+.secure-chat-blur-enabled.secure-chat-blur-avatar #pane-side div[role="row"] img:focus,
+.secure-chat-blur-avatar #pane-side div[role="row"]:hover img,
+.secure-chat-blur-avatar #pane-side div[role="row"]:focus-within img,
+.secure-chat-blur-avatar [data-testid="chat-list"] div[role="row"]:hover img,
+.secure-chat-blur-avatar [data-testid="chat-list"] div[role="row"]:focus-within img,
+.secure-chat-blur-avatar [data-testid="chat-list"] [data-testid^="list-item-"]:hover img,
+.secure-chat-blur-avatar [data-testid="chat-list"] [data-testid^="list-item-"]:focus-within img,
+.secure-chat-blur-avatar #pane-side div[role="row"] img:hover,
+.secure-chat-blur-avatar #pane-side div[role="row"] img:focus {
+  filter: none !important;
+}
