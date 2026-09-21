@@ -4,8 +4,8 @@ import { defineConfig } from 'wxt';
 export default defineConfig({
   modules: ['@wxt-dev/module-vue'],
   manifest: {
-    name: 'Secure Chat',
-    description: 'Blurs WhatsApp Web chat list items until hovered for enhanced screen privacy.',
+    name: 'ChatGard: Screen Privacy for Web Messengers',
+    description: 'Screen privacy and blur protection for WhatsApp Web, Telegram, and web messengers.',
     permissions: ['storage'],
   },
 });
