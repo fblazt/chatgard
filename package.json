@@ -1,6 +1,6 @@
 {
-  "name": "secure-chat",
-  "description": "Privacy blur browser extension for WhatsApp Web",
+  "name": "chatgard",
+  "description": "Screen privacy and blur browser extension for web messengers",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -16,7 +16,10 @@
   },
   "keywords": [
     "whatsapp",
+    "telegram",
     "privacy",
+    "screen-privacy",
+    "anti-shoulder-surfing",
     "blur",
     "wxt",
     "extension",
