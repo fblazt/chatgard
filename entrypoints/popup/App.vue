@@ -61,10 +61,6 @@ async function handleReset() {
         </div>
         <h1 class="header-title">ChatGard</h1>
       </div>
-      <div class="active-badge">
-        <span class="pulse-dot"></span>
-        <span class="badge-text">WhatsApp Web</span>
-      </div>
     </header>
 
     <!-- Master Switch Card -->
@@ -252,42 +248,6 @@ async function handleReset() {
   color: #f8fafc;
 }
 
-.active-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 3px 8px;
-  background-color: #1e293b;
-  border: 1px solid #334155;
-  border-radius: 9999px;
-}
-
-.pulse-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #10b981;
-  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-  animation: pulse-ring 1.8s infinite;
-}
-
-@keyframes pulse-ring {
-  0% {
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-  }
-}
-
-.badge-text {
-  font-size: 11px;
-  font-weight: 500;
-  color: #94a3b8;
-}
 
 /* Master Card */
 .master-card {
