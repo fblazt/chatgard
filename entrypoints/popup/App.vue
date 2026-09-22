@@ -70,8 +70,8 @@ async function handleReset() {
     <!-- Master Switch Card -->
     <div class="master-card">
       <div class="master-text">
-        <span class="master-title">Blur Chat List</span>
-        <span class="master-subtitle">Blurs chats by default, hover to reveal</span>
+        <span class="master-title">Enable ChatGard</span>
+        <span class="master-subtitle">Toggle all blur protections on or off</span>
       </div>
       <label class="switch">
         <input
