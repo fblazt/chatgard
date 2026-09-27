@@ -77,7 +77,7 @@ async function handleReset() {
   padding: 0;
   background-color: var(--bg-body, #0a0e14);
   display: block;
-  min-width: 320px;
+  min-width: 360px;
 }
 
 :global(#app) {
@@ -88,19 +88,19 @@ async function handleReset() {
 }
 
 .popup-container {
-  width: 320px;
+  width: 360px;
   box-sizing: border-box;
   font-family: var(--font-mono, monospace);
-  padding: 12px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .controls-section {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   transition: opacity 0.2s ease;
 }
 
