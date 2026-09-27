@@ -49,29 +49,29 @@ function handleToggle<K extends keyof PrivacyBlurSettings>(
           />
         </div>
 
-        <!-- Split Row: Last Message & Contact Name -->
-        <div class="matrix-row split-row">
-          <div class="matrix-cell split-cell-left">
-            <span class="cell-label">Last Message</span>
-            <TacticalToggle
-              :model-value="settings.blurLastMessage"
-              :disabled="disabled"
-              @update:model-value="handleToggle('blurLastMessage', $event)"
-            />
-          </div>
-          <div class="matrix-cell">
-            <span class="cell-label">Contact Name</span>
-            <TacticalToggle
-              :model-value="settings.blurContactName"
-              :disabled="disabled"
-              @update:model-value="handleToggle('blurContactName', $event)"
-            />
-          </div>
+        <!-- Child Row 1: Last Message -->
+        <div class="matrix-row full-row child-row">
+          <span class="cell-label child-label">Last Message</span>
+          <TacticalToggle
+            :model-value="settings.blurLastMessage"
+            :disabled="disabled"
+            @update:model-value="handleToggle('blurLastMessage', $event)"
+          />
         </div>
 
-        <!-- Row 3: Avatar Photo -->
-        <div class="matrix-row full-row">
-          <span class="cell-label">Avatar Photo</span>
+        <!-- Child Row 2: Contact Name -->
+        <div class="matrix-row full-row child-row">
+          <span class="cell-label child-label">Contact Name</span>
+          <TacticalToggle
+            :model-value="settings.blurContactName"
+            :disabled="disabled"
+            @update:model-value="handleToggle('blurContactName', $event)"
+          />
+        </div>
+
+        <!-- Child Row 3: Avatar Photo -->
+        <div class="matrix-row full-row child-row">
+          <span class="cell-label child-label">Avatar Photo</span>
           <TacticalToggle
             :model-value="settings.blurAvatar"
             :disabled="disabled"
@@ -170,33 +170,18 @@ function handleToggle<K extends keyof PrivacyBlurSettings>(
   color: var(--text-primary, #e2e8f0);
 }
 
-.split-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.split-row .matrix-cell {
-  padding: 9px 10px;
-  gap: 8px;
-  min-height: 40px;
-}
-
 .full-row {
   padding: 10px 14px;
   gap: 12px;
   min-height: 42px;
-}
-
-.matrix-cell,
-.full-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
 }
 
-.split-cell-left {
-  border-right: 1px solid var(--card-border, #1a2638);
+.child-row {
+  padding-left: 20px;
 }
 
 .cell-label {
@@ -212,5 +197,12 @@ function handleToggle<K extends keyof PrivacyBlurSettings>(
 .full-row .cell-label {
   font-size: 12px;
   font-weight: 600;
+}
+
+.child-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary, #8292a8);
+  letter-spacing: -0.1px;
 }
 </style>
