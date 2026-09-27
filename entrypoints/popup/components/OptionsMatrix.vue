@@ -25,8 +25,9 @@ function handleToggle<K extends keyof PrivacyBlurSettings>(
   const updates = syncChatListGroup(key, value, props.settings);
   if (Object.keys(updates).length > 1) {
     emit('update-batch', updates);
+  } else {
+    emit('update', key, value);
   }
-  emit('update', key, value);
 }
 </script>
 
