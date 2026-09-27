@@ -89,10 +89,10 @@ function handleInput(event: Event) {
   background: var(--card-bg, #0d1522);
   border: 1px solid var(--card-border, #1a2638);
   border-radius: 2px;
-  padding: 10px 12px;
+  padding: 12px 16px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   box-sizing: border-box;
   user-select: none;
   overflow: hidden;

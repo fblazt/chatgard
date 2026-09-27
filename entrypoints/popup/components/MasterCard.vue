@@ -30,7 +30,7 @@ const emit = defineEmits<{
   background-color: var(--card-bg, #0d1522);
   border: 1px solid var(--card-border, #1a2638);
   border-radius: 2px;
-  padding: 12px 14px;
+  padding: 13px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;

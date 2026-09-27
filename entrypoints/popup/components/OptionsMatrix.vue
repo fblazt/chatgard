@@ -112,8 +112,8 @@ const emit = defineEmits<{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 12px;
-  min-height: 40px;
+  padding: 11px 14px;
+  min-height: 42px;
   box-sizing: border-box;
 }
 
