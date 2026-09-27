@@ -64,6 +64,7 @@ function toggle() {
   -webkit-user-select: none;
   font-family: var(--font-mono, monospace);
   text-transform: uppercase;
+  flex-shrink: 0;
 }
 
 .tactical-toggle.is-disabled {
@@ -91,7 +92,11 @@ function toggle() {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 2px 6px;
+  width: 48px;
+  min-width: 48px;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 2px 4px;
   font-family: var(--font-mono, monospace);
   font-size: 11px;
   font-weight: 700;
@@ -107,6 +112,7 @@ function toggle() {
   color: var(--text-muted, #50657e);
   transition: all 0.2s ease;
   outline: none;
+  flex-shrink: 0;
 }
 
 .bracket-badge:hover:not(:disabled) {
