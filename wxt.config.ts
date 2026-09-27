@@ -8,4 +8,7 @@ export default defineConfig({
     description: 'Screen privacy and blur protection for WhatsApp Web, Telegram, and web messengers.',
     permissions: ['storage'],
   },
+  webExt: {
+    disabled: true,
+  }
 });
