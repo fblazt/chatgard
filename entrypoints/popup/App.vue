@@ -38,6 +38,11 @@ async function handleUpdate<K extends keyof PrivacyBlurSettings>(
   await updatePrivacySettings({ [key]: value });
 }
 
+async function handleUpdateBatch(updates: Partial<PrivacyBlurSettings>) {
+  Object.assign(settings.value, updates);
+  await updatePrivacySettings(updates);
+}
+
 async function handleReset() {
   await resetPrivacySettings();
   settings.value = await getPrivacySettings();
@@ -61,6 +66,7 @@ async function handleReset() {
         :settings="settings"
         :disabled="!settings.enabled"
         @update="handleUpdate"
+        @update-batch="handleUpdateBatch"
       />
     </div>
     <footer class="popup-footer">
