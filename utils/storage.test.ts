@@ -3,6 +3,7 @@ import { fakeBrowser } from 'wxt/testing/fake-browser';
 
 import { describe, it, expect, beforeEach } from 'bun:test';
 import { DEFAULT_SETTINGS } from '../types/settings';
+import { syncChatListGroup } from './group-sync';
 
 const {
   privacySettingsStorage,
@@ -88,6 +89,50 @@ describe('storage utility', () => {
       const stored = await getPrivacySettings();
       expect(stored).toEqual(DEFAULT_SETTINGS);
       expect(stored.blurChatWindow).toBe(DEFAULT_SETTINGS.blurChatWindow);
+    });
+  });
+
+  describe('group synchronization persistence', () => {
+    it('persists cascaded master toggle activation to storage', async () => {
+      const current = await getPrivacySettings();
+      const updates = syncChatListGroup('blurEntireRow', true, current);
+      await updatePrivacySettings(updates);
+
+      const stored = await getPrivacySettings();
+      expect(stored.blurEntireRow).toBe(true);
+      expect(stored.blurLastMessage).toBe(true);
+      expect(stored.blurContactName).toBe(true);
+      expect(stored.blurAvatar).toBe(true);
+    });
+
+    it('persists custom child toggle deactivation and unsets blurEntireRow', async () => {
+      const initial = await getPrivacySettings();
+      const masterUpdates = syncChatListGroup('blurEntireRow', true, initial);
+      const allActiveSettings = await updatePrivacySettings(masterUpdates);
+
+      const updates = syncChatListGroup('blurAvatar', false, allActiveSettings);
+      await updatePrivacySettings(updates);
+
+      const stored = await getPrivacySettings();
+      expect(stored.blurAvatar).toBe(false);
+      expect(stored.blurEntireRow).toBe(false);
+      expect(stored.blurLastMessage).toBe(true);
+      expect(stored.blurContactName).toBe(true);
+    });
+
+    it('persists restoration of master when missing child is re-enabled', async () => {
+      const initial = await getPrivacySettings();
+      const masterUpdates = syncChatListGroup('blurEntireRow', true, initial);
+      const allActive = await updatePrivacySettings(masterUpdates);
+      const childDeactUpdates = syncChatListGroup('blurAvatar', false, allActive);
+      const current = await updatePrivacySettings(childDeactUpdates);
+
+      const updates = syncChatListGroup('blurAvatar', true, current);
+      await updatePrivacySettings(updates);
+
+      const stored = await getPrivacySettings();
+      expect(stored.blurAvatar).toBe(true);
+      expect(stored.blurEntireRow).toBe(true);
     });
   });
 });
