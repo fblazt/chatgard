@@ -58,7 +58,7 @@ function toggle() {
 .tactical-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
@@ -74,7 +74,7 @@ function toggle() {
 
 .indicator-bar {
   width: 3px;
-  height: 14px;
+  height: 13px;
   border-radius: 1px;
   background-color: var(--inactive-bar, #334860);
   opacity: 0.6;
@@ -92,13 +92,14 @@ function toggle() {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  min-width: 48px;
+  width: 42px;
+  min-width: 42px;
+  height: 20px;
   box-sizing: border-box;
   text-align: center;
-  padding: 2px 4px;
+  padding: 1px 2px;
   font-family: var(--font-mono, monospace);
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: 0.5px;

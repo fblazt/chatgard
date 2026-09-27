@@ -77,7 +77,7 @@ async function handleReset() {
   padding: 0;
   background-color: var(--bg-body, #0a0e14);
   display: block;
-  min-width: 360px;
+  min-width: 380px;
 }
 
 :global(#app) {
@@ -88,7 +88,7 @@ async function handleReset() {
 }
 
 .popup-container {
-  width: 360px;
+  width: 380px;
   box-sizing: border-box;
   font-family: var(--font-mono, monospace);
   padding: 14px;

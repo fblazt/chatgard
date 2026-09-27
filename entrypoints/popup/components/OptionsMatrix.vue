@@ -112,9 +112,19 @@ const emit = defineEmits<{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 11px 14px;
-  min-height: 42px;
   box-sizing: border-box;
+}
+
+.split-row .matrix-cell {
+  padding: 9px 10px;
+  gap: 8px;
+  min-height: 40px;
+}
+
+.full-row {
+  padding: 10px 14px;
+  gap: 12px;
+  min-height: 42px;
 }
 
 .split-cell-left {
@@ -123,9 +133,16 @@ const emit = defineEmits<{
 
 .cell-label {
   font-family: var(--font-mono, monospace);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
   color: var(--text-primary, #e2e8f0);
   user-select: none;
+}
+
+.full-row .cell-label {
+  font-size: 12px;
+  font-weight: 600;
 }
 </style>
