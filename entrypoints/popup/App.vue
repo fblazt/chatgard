@@ -97,16 +97,16 @@ async function handleReset() {
   width: 380px;
   box-sizing: border-box;
   font-family: var(--font-mono, monospace);
-  padding: 14px;
+  padding: 12px 14px 14px 14px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .controls-section {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   transition: opacity 0.2s ease;
 }
 
