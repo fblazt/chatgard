@@ -1,80 +1,77 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* WhatsApp pastel green accents */
+  --accent-green: #25D366;
+  --accent-green-pastel: #34d399;
+  --accent-green-glow: rgba(37, 211, 102, 0.25);
+  --accent-green-border: rgba(37, 211, 102, 0.6);
+
+  /* Tactical dark backgrounds and card colors */
+  --bg-dark: #090e17;
+  --card-bg: #0d1522;
+  --card-border: #1a2638;
+  --card-border-subtle: #131d2c;
+
+  /* Muted / Inactive states */
+  --text-primary: #e2e8f0;
+  --text-secondary: #8292a8;
+  --text-muted: #475a72;
+  --inactive-border: #243348;
+  --inactive-bar: #334860;
+
+  /* Typography */
+  --font-mono: ui-monospace, 'SFMono-Regular', 'JetBrains Mono', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+  font-family: var(--font-mono);
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color-scheme: dark;
+  color: var(--text-primary);
+  background-color: var(--bg-dark);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-.card {
-  padding: 2em;
+  padding: 0;
+  min-width: 380px;
+  width: 380px;
+  box-sizing: border-box;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  background-color: var(--bg-dark);
+  background-image:
+    linear-gradient(to right, rgba(30, 48, 75, 0.35) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(30, 48, 75, 0.35) 1px, transparent 1px);
+  background-size: 16px 16px;
+  overflow-x: hidden;
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 380px;
+  min-width: 380px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.hud-scanlines {
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.25) 0px,
+    rgba(0, 0, 0, 0.25) 1px,
+    transparent 1px,
+    transparent 3px
+  );
 }
