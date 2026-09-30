@@ -19,5 +19,8 @@ export default defineConfig({
   },
   webExt: {
     disabled: true,
-  }
+  },
+  zip: {
+    zipSources: false,
+  },
 });
