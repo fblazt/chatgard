@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/fblazt/chatgard/compare/chatgard-v1.3.0...chatgard-v1.4.0) (2026-10-05)
+
+
+### Features
+
+* **branding:** add brand icon assets, installation guides, and privacy documentation ([#4](https://github.com/fblazt/chatgard/issues/4)) ([44571b8](https://github.com/fblazt/chatgard/commit/44571b8f9f670fa9a04e571ac4e133f856553d3b))
+
 ## [1.3.0](https://github.com/fblazt/chatgard/compare/chatgard-v1.2.0...chatgard-v1.3.0) (2026-09-28)
 
 
