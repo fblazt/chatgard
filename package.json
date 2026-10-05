@@ -8,11 +8,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fblazt/secure-chat.git"
+    "url": "https://github.com/fblazt/chatgard.git"
   },
-  "homepage": "https://github.com/fblazt/secure-chat#readme",
+  "homepage": "https://github.com/fblazt/chatgard#readme",
   "bugs": {
-    "url": "https://github.com/fblazt/secure-chat/issues"
+    "url": "https://github.com/fblazt/chatgard/issues"
   },
   "keywords": [
     "whatsapp",
