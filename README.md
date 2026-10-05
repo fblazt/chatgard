@@ -91,6 +91,19 @@ bun run compile
 - **Chromium-based browsers** (Chrome, Brave, Edge): Supported and tested.
 - **Firefox**: Experimental / Not fully tested yet (Manifest V2 build available via `bun run build:firefox`).
 
+## Privacy & Security
+
+ChatGard is designed from the ground up with a strict privacy-first architecture:
+
+- **100% Client-Side**: All blurring and hover-to-reveal effects occur entirely in your browser via local CSS injection and DOM mutations.
+- **Zero Telemetry & Analytics**: No tracking pixels, remote server requests, telemetry, or external network calls of any kind.
+- **Local Storage Only**: User preferences (such as blur intensity and section toggles) are saved strictly on your local device using standard extension storage (`chrome.storage.local` / `browser.storage.local`).
+- **No Chat Exfiltration**: ChatGard never reads, records, intercepts, or transmits your messages, contact lists, phone numbers, or media files.
+
+## Disclaimer
+
+ChatGard is an independent open-source project and is not affiliated, associated, authorized, endorsed by, or in any way officially connected with WhatsApp LLC, Meta Platforms, Inc., or any of their subsidiaries or affiliates. The official WhatsApp website can be found at [https://whatsapp.com](https://whatsapp.com).
+
 ## License
 
 MIT
