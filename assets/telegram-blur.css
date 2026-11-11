@@ -1,0 +1,66 @@
+/**
+ * ChatGard - Telegram Web A Privacy Blur Styles
+ * Targets Telegram Web A DOM elements verified from inspection dumps.
+ */
+
+/* ==========================================================================
+   1. Root CSS Variables
+   ========================================================================== */
+:root {
+  --chat-blur-amount: 8px;
+  --chat-blur-transition: filter 0.18s ease-in-out;
+}
+
+/* ==========================================================================
+   2. Entire Row Blur
+   Active when .chat-blur-entire-row is present on root.
+   ========================================================================== */
+.chat-blur-enabled.chat-blur-entire-row .ListItem.Chat {
+  filter: blur(var(--chat-blur-amount, 8px));
+  transition: var(--chat-blur-transition, filter 0.18s ease-in-out);
+  will-change: filter;
+}
+
+/* ==========================================================================
+   3. Selective Blur Classes
+   ========================================================================== */
+
+/* --- 3.1 Last Message Preview Blur --- */
+.chat-blur-enabled.chat-blur-message .ListItem.Chat .last-message {
+  filter: blur(var(--chat-blur-amount, 8px));
+  transition: var(--chat-blur-transition, filter 0.18s ease-in-out);
+  will-change: filter;
+}
+
+/* --- 3.2 Contact / Chat Title Blur --- */
+.chat-blur-enabled.chat-blur-contact .ListItem.Chat .fullName,
+.chat-blur-enabled.chat-blur-contact .MiddleHeader .fullName {
+  filter: blur(var(--chat-blur-amount, 8px));
+  transition: var(--chat-blur-transition, filter 0.18s ease-in-out);
+  will-change: filter;
+}
+
+/* --- 3.3 Profile Avatar Blur --- */
+.chat-blur-enabled.chat-blur-avatar .ListItem.Chat .avatar-wrapper,
+.chat-blur-enabled.chat-blur-avatar .MiddleHeader .Avatar,
+.chat-blur-enabled.chat-blur-avatar .Message .Avatar {
+  filter: blur(var(--chat-blur-amount, 8px));
+  transition: var(--chat-blur-transition, filter 0.18s ease-in-out);
+  will-change: filter;
+}
+
+/* --- 3.4 Active Conversation View Blur (Chat Window) --- */
+.chat-blur-enabled.chat-blur-chat-window .Message .content-inner {
+  filter: blur(var(--chat-blur-amount, 8px));
+  transition: var(--chat-blur-transition, filter 0.18s ease-in-out);
+  will-change: filter;
+}
+
+/* ==========================================================================
+   4. Hover and Focus Unblur
+   Reveals chat items on hover or keyboard focus when unblurOnHover is enabled.
+   ========================================================================== */
+:where(.chat-blur-enabled.chat-blur-unblur-on-hover) :is(.ListItem.Chat, .MiddleHeader, .Message):is(:hover, :focus-within),
+:where(.chat-blur-enabled.chat-blur-unblur-on-hover) :is(.ListItem.Chat, .MiddleHeader, .Message):is(:hover, :focus-within) :is(.fullName, .last-message, .avatar-wrapper, .Avatar, .content-inner) {
+  filter: none !important;
+}

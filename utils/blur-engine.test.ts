@@ -8,6 +8,7 @@ import {
   BLUR_ENABLED_CLASS,
   BLUR_ENTIRE_ROW_CLASS,
   BLUR_MESSAGE_CLASS,
+  BLUR_UNBLUR_ON_HOVER_CLASS,
   applyPrivacySettingsToDOM,
   computeDOMClasses,
   computeStyleVariables,
@@ -80,6 +81,7 @@ describe('blur-engine constants', () => {
     expect(BLUR_CONTACT_CLASS).toBe('chat-blur-contact');
     expect(BLUR_AVATAR_CLASS).toBe('chat-blur-avatar');
     expect(BLUR_CHAT_WINDOW_CLASS).toBe('chat-blur-chat-window');
+    expect(BLUR_UNBLUR_ON_HOVER_CLASS).toBe('chat-blur-unblur-on-hover');
   });
 
   it('contains all blur classes in ALL_BLUR_CLASSES', () => {
@@ -90,6 +92,7 @@ describe('blur-engine constants', () => {
       BLUR_CONTACT_CLASS,
       BLUR_AVATAR_CLASS,
       BLUR_CHAT_WINDOW_CLASS,
+      BLUR_UNBLUR_ON_HOVER_CLASS,
     ]);
   });
 });
@@ -123,6 +126,7 @@ describe('computeDOMClasses', () => {
     expect(computeDOMClasses(fullRowSettings)).toEqual([
       BLUR_ENABLED_CLASS,
       BLUR_ENTIRE_ROW_CLASS,
+      BLUR_UNBLUR_ON_HOVER_CLASS,
     ]);
   });
 
@@ -139,6 +143,7 @@ describe('computeDOMClasses', () => {
     expect(computeDOMClasses(messageOnly)).toEqual([
       BLUR_ENABLED_CLASS,
       BLUR_MESSAGE_CLASS,
+      BLUR_UNBLUR_ON_HOVER_CLASS,
     ]);
 
     const contactAndAvatar: PrivacyBlurSettings = {
@@ -154,6 +159,7 @@ describe('computeDOMClasses', () => {
       BLUR_ENABLED_CLASS,
       BLUR_CONTACT_CLASS,
       BLUR_AVATAR_CLASS,
+      BLUR_UNBLUR_ON_HOVER_CLASS,
     ]);
 
     const allSelective: PrivacyBlurSettings = {
@@ -171,6 +177,7 @@ describe('computeDOMClasses', () => {
       BLUR_CONTACT_CLASS,
       BLUR_AVATAR_CLASS,
       BLUR_CHAT_WINDOW_CLASS,
+      BLUR_UNBLUR_ON_HOVER_CLASS,
     ]);
   });
 
@@ -184,6 +191,7 @@ describe('computeDOMClasses', () => {
     expect(computeDOMClasses(chatWindowSettings)).toEqual([
       BLUR_ENABLED_CLASS,
       BLUR_CHAT_WINDOW_CLASS,
+      BLUR_UNBLUR_ON_HOVER_CLASS,
     ]);
   });
 
@@ -197,7 +205,7 @@ describe('computeDOMClasses', () => {
     expect(computeDOMClasses(withoutChatWindow)).not.toContain(BLUR_CHAT_WINDOW_CLASS);
   });
 
-  it('returns only BLUR_ENABLED_CLASS when enabled but no blur options selected', () => {
+  it('returns only BLUR_ENABLED_CLASS and unblur class when enabled but no blur options selected', () => {
     const minimalEnabled: PrivacyBlurSettings = {
       ...baseSettings,
       enabled: true,
@@ -207,7 +215,39 @@ describe('computeDOMClasses', () => {
       blurAvatar: false,
       blurChatWindow: false,
     };
-    expect(computeDOMClasses(minimalEnabled)).toEqual([BLUR_ENABLED_CLASS]);
+    expect(computeDOMClasses(minimalEnabled)).toEqual([
+      BLUR_ENABLED_CLASS,
+      BLUR_UNBLUR_ON_HOVER_CLASS,
+    ]);
+  });
+
+  it('returns hover unblur class when unblurOnHover is true', () => {
+    const hoverEnabled: PrivacyBlurSettings = {
+      ...baseSettings,
+      enabled: true,
+      unblurOnHover: true,
+    };
+    expect(computeDOMClasses(hoverEnabled)).toContain(BLUR_UNBLUR_ON_HOVER_CLASS);
+  });
+
+  it('omits hover unblur class when unblurOnHover is false', () => {
+    const hoverDisabled: PrivacyBlurSettings = {
+      ...baseSettings,
+      enabled: true,
+      unblurOnHover: false,
+    };
+    expect(computeDOMClasses(hoverDisabled)).not.toContain(BLUR_UNBLUR_ON_HOVER_CLASS);
+    expect(computeDOMClasses(hoverDisabled)).toEqual([BLUR_ENABLED_CLASS]);
+  });
+
+  it('does not emit hover unblur class when settings are disabled even if unblurOnHover is true', () => {
+    const disabledWithHover: PrivacyBlurSettings = {
+      ...baseSettings,
+      enabled: false,
+      unblurOnHover: true,
+    };
+    expect(computeDOMClasses(disabledWithHover)).toEqual([]);
+    expect(computeDOMClasses(disabledWithHover)).not.toContain(BLUR_UNBLUR_ON_HOVER_CLASS);
   });
 });
 
@@ -248,6 +288,7 @@ describe('applyPrivacySettingsToDOM', () => {
     expect(classes.has(BLUR_CHAT_WINDOW_CLASS)).toBe(true);
     expect(classes.has(BLUR_AVATAR_CLASS)).toBe(false);
     expect(classes.has(BLUR_ENTIRE_ROW_CLASS)).toBe(false);
+    expect(classes.has(BLUR_UNBLUR_ON_HOVER_CLASS)).toBe(true);
     expect(styles.get('--chat-blur-amount')).toBe('12px');
   });
 
@@ -284,6 +325,7 @@ describe('applyPrivacySettingsToDOM', () => {
       BLUR_ENTIRE_ROW_CLASS,
       BLUR_MESSAGE_CLASS,
       BLUR_CHAT_WINDOW_CLASS,
+      BLUR_UNBLUR_ON_HOVER_CLASS,
     ]);
 
     const disabledSettings: PrivacyBlurSettings = {
@@ -291,6 +333,7 @@ describe('applyPrivacySettingsToDOM', () => {
       enabled: false,
       blurEntireRow: true,
       blurChatWindow: true,
+      unblurOnHover: true,
     };
 
     applyPrivacySettingsToDOM(disabledSettings, doc);
@@ -299,6 +342,7 @@ describe('applyPrivacySettingsToDOM', () => {
     expect(classes.has(BLUR_ENTIRE_ROW_CLASS)).toBe(false);
     expect(classes.has(BLUR_MESSAGE_CLASS)).toBe(false);
     expect(classes.has(BLUR_CHAT_WINDOW_CLASS)).toBe(false);
+    expect(classes.has(BLUR_UNBLUR_ON_HOVER_CLASS)).toBe(false);
   });
 
   it('falls back to doc.body if documentElement is absent', () => {
@@ -339,12 +383,28 @@ describe('applyPrivacySettingsToDOM', () => {
       (globalThis as any).document = originalDoc;
     }
   });
+
+  it('updates hover unblur class when unblurOnHover setting is toggled', () => {
+    const { doc, classes } = createMockDocument();
+
+    applyPrivacySettingsToDOM({ ...baseSettings, unblurOnHover: true }, doc);
+    expect(classes.has(BLUR_UNBLUR_ON_HOVER_CLASS)).toBe(true);
+
+    applyPrivacySettingsToDOM({ ...baseSettings, unblurOnHover: false }, doc);
+    expect(classes.has(BLUR_UNBLUR_ON_HOVER_CLASS)).toBe(false);
+  });
 });
 
 describe('removePrivacySettingsFromDOM', () => {
   it('removes all blur classes and style properties from targetDoc', () => {
     const { doc, classes, styles } = createMockDocument(
-      [BLUR_ENABLED_CLASS, BLUR_ENTIRE_ROW_CLASS, BLUR_MESSAGE_CLASS, BLUR_CHAT_WINDOW_CLASS],
+      [
+        BLUR_ENABLED_CLASS,
+        BLUR_ENTIRE_ROW_CLASS,
+        BLUR_MESSAGE_CLASS,
+        BLUR_CHAT_WINDOW_CLASS,
+        BLUR_UNBLUR_ON_HOVER_CLASS,
+      ],
       { '--chat-blur-amount': '10px' }
     );
 
@@ -354,13 +414,19 @@ describe('removePrivacySettingsFromDOM', () => {
     expect(classes.has(BLUR_ENTIRE_ROW_CLASS)).toBe(false);
     expect(classes.has(BLUR_MESSAGE_CLASS)).toBe(false);
     expect(classes.has(BLUR_CHAT_WINDOW_CLASS)).toBe(false);
+    expect(classes.has(BLUR_UNBLUR_ON_HOVER_CLASS)).toBe(false);
     expect(styles.has('--chat-blur-amount')).toBe(false);
   });
 
   it('defaults to globalThis.document when targetDoc is omitted', () => {
     const originalDoc = (globalThis as any).document;
     const { doc, classes, styles } = createMockDocument(
-      [BLUR_ENABLED_CLASS, BLUR_AVATAR_CLASS, BLUR_CHAT_WINDOW_CLASS],
+      [
+        BLUR_ENABLED_CLASS,
+        BLUR_AVATAR_CLASS,
+        BLUR_CHAT_WINDOW_CLASS,
+        BLUR_UNBLUR_ON_HOVER_CLASS,
+      ],
       { '--chat-blur-amount': '8px' }
     );
 
@@ -371,6 +437,7 @@ describe('removePrivacySettingsFromDOM', () => {
       expect(classes.has(BLUR_ENABLED_CLASS)).toBe(false);
       expect(classes.has(BLUR_AVATAR_CLASS)).toBe(false);
       expect(classes.has(BLUR_CHAT_WINDOW_CLASS)).toBe(false);
+      expect(classes.has(BLUR_UNBLUR_ON_HOVER_CLASS)).toBe(false);
       expect(styles.has('--chat-blur-amount')).toBe(false);
     } finally {
       (globalThis as any).document = originalDoc;
