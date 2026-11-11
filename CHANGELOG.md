@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/fblazt/chatgard/compare/chatgard-v1.4.0...chatgard-v1.5.0) (2026-11-11)
+
+
+### Features
+
+* **telegram:** add privacy blur support for Telegram Web A ([#6](https://github.com/fblazt/chatgard/issues/6)) ([43557a4](https://github.com/fblazt/chatgard/commit/43557a441408674717654c68877efc1ed8eb9eee))
+
 ## [1.4.0](https://github.com/fblazt/chatgard/compare/chatgard-v1.3.0...chatgard-v1.4.0) (2026-10-05)
 
 
