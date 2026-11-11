@@ -1,11 +1,12 @@
 # ChatGard: Screen Privacy for Web Messengers
 
-ChatGard is a browser extension that blurs chat lists and messages until hovered to prevent shoulder surfing in public and office environments. Built for WhatsApp Web with planned support for Telegram Web and other web messengers.
+ChatGard is a browser extension that blurs chat lists and messages until hovered to prevent shoulder surfing in public and office environments. Built for WhatsApp Web and Telegram Web A (`web.telegram.org/a/`) with planned support for additional web messengers.
 
 ## Features
 
-- **Hover to reveal**: Blurs chat list items by default and reveals content when hovered.
-- **Configurable popup**: Toggle protection on/off and adjust blur intensity.
+- **Hover to reveal**: Blurs chat list items and message bodies by default and reveals content when hovered or focused.
+- **Configurable popup**: Toggle protection on/off, adjust blur intensity, and selectively choose which elements to blur (entire row, last message preview, contact names, avatars, active chat window).
+- **Supported platforms**: Full privacy blur support on WhatsApp Web (`web.whatsapp.com`) and Telegram Web A (`web.telegram.org/a/*`).
 - **Local-first**: No remote requests, no telemetry, and operates strictly on client DOM.
 
 ## Installation from Release
@@ -21,7 +22,7 @@ Download the pre-built zip file for your browser from the latest [GitHub Release
    - Edge: `edge://extensions`
 3. Toggle **Developer mode** on (in the top-right corner).
 4. Click **Load unpacked** and select the extracted folder.
-5. Open [WhatsApp Web](https://web.whatsapp.com) to use ChatGard.
+5. Open [WhatsApp Web](https://web.whatsapp.com) or [Telegram Web A](https://web.telegram.org/a/) to use ChatGard.
 
 ### Firefox (Experimental / Untested)
 
@@ -29,10 +30,10 @@ Download the pre-built zip file for your browser from the latest [GitHub Release
 2. Open `about:debugging#/runtime/this-firefox` in Firefox.
 3. Click **Load Temporary Add-on...**.
 4. Select the `manifest.json` file inside the extracted folder.
-5. Open [WhatsApp Web](https://web.whatsapp.com).
+5. Open [WhatsApp Web](https://web.whatsapp.com) or [Telegram Web A](https://web.telegram.org/a/).
 
 > [!NOTE]
-> In standard Firefox, temporary add-ons stay loaded until the browser restarts. Firefox support is experimental and has not been comprehensively validated on live WhatsApp Web yet.
+> In standard Firefox, temporary add-ons stay loaded until the browser restarts. Firefox support is experimental and has not been comprehensively validated on live WhatsApp Web or Telegram Web yet.
 
 ## Building from Source
 
@@ -102,7 +103,7 @@ ChatGard is designed from the ground up with a strict privacy-first architecture
 
 ## Disclaimer
 
-ChatGard is an independent open-source project and is not affiliated, associated, authorized, endorsed by, or in any way officially connected with WhatsApp LLC, Meta Platforms, Inc., or any of their subsidiaries or affiliates. The official WhatsApp website can be found at [https://whatsapp.com](https://whatsapp.com).
+ChatGard is an independent open-source project and is not affiliated, associated, authorized, endorsed by, or in any way officially connected with WhatsApp LLC, Meta Platforms, Inc., Telegram FZ-LLC, Telegram Messenger Inc., or any of their subsidiaries or affiliates. The official WhatsApp website can be found at [https://whatsapp.com](https://whatsapp.com), and the official Telegram website can be found at [https://telegram.org](https://telegram.org).
 
 ## License
 

@@ -6,6 +6,7 @@ export const BLUR_MESSAGE_CLASS = 'chat-blur-message';
 export const BLUR_CONTACT_CLASS = 'chat-blur-contact';
 export const BLUR_AVATAR_CLASS = 'chat-blur-avatar';
 export const BLUR_CHAT_WINDOW_CLASS = 'chat-blur-chat-window';
+export const BLUR_UNBLUR_ON_HOVER_CLASS = 'chat-blur-unblur-on-hover';
 
 export const ALL_BLUR_CLASSES: string[] = [
   BLUR_ENABLED_CLASS,
@@ -14,6 +15,7 @@ export const ALL_BLUR_CLASSES: string[] = [
   BLUR_CONTACT_CLASS,
   BLUR_AVATAR_CLASS,
   BLUR_CHAT_WINDOW_CLASS,
+  BLUR_UNBLUR_ON_HOVER_CLASS,
 ];
 
 export function computeDOMClasses(settings: PrivacyBlurSettings): string[] {
@@ -37,6 +39,9 @@ export function computeDOMClasses(settings: PrivacyBlurSettings): string[] {
   }
   if (settings.blurChatWindow) {
     classes.push(BLUR_CHAT_WINDOW_CLASS);
+  }
+  if (settings.unblurOnHover) {
+    classes.push(BLUR_UNBLUR_ON_HOVER_CLASS);
   }
 
   return classes;
