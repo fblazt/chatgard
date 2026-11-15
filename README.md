@@ -2,6 +2,8 @@
 
 ChatGard is a browser extension that blurs chat lists and messages until hovered to prevent shoulder surfing in public and office environments. Built for WhatsApp Web and Telegram Web A (`web.telegram.org/a/`) with planned support for additional web messengers.
 
+![ChatGard demo showing blur protection, hover to reveal, and selective privacy controls](.github/assets/chatgard-demo.gif)
+
 ## Features
 
 - **Hover to reveal**: Blurs chat list items and message bodies by default and reveals content when hovered or focused.
